@@ -51,7 +51,23 @@ switch ($command) {
         echo "  php bin/console.php books:list\n";
         echo "  php bin/console.php book:lend B1 M1\n";
         echo "  php bin/console.php book:return B1\n";
+        
+
         exit(0);
+     //creazione funzione member list per stampare nome e id tutti membri//
+        
+        case 'book:memberlist':
+        $members = $membersRepo->findAll();
+        if ($members){
+            foreach($members as $member){
+                echo $member->id()." | " .$member->fullName()."\n";
+                
+            }}
+             else {
+                echo "Nessun membro";
+            
+             }
+             exit (0);
 
     case 'books:list':
         foreach ($service->listBooks() as $line) {
