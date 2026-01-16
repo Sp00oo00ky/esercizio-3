@@ -47,7 +47,7 @@ switch ($command) {
 
         echo "  books:list                Elenca tutti, dichiarando se sono in prestito o disponibil, insieme al nome dell'autore ed il nome del Libro.\n";
 
-        echo "  loans:list                Mostra l'elenco dei libri prestati fino ad ora, identificando ogni libro ed ogni membro con un codice identificativo ed unico, insieme alla data dell'avvenuto prestito.\n";
+        echo "  loans:list                Mostra l'elenco dei libri prestati fino ad ora, identificando ogni libro ed ogni membro con un codice identificativo ed unico,\ninsieme alla data dell'avvenuto prestito.\n";
 
         echo "  book:lend <BOOK> <MEM>    Presta un libro a un membro, ed identifica ogni prestito con un codice numerico\n";
 
