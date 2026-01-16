@@ -58,15 +58,13 @@ switch ($command) {
      //creazione funzione member list per stampare nome e id tutti membri//
         
         case 'members:list':
-        $members = $membersRepo->findAll();
-        if ($members){
-            foreach($members as $member){
-                echo $member->id()." | " .$member->fullName()."\n";
-                
-            }}
+            $members = $membersRepo->findAll();
+            if ($members){
+                foreach($members as $member){
+                    echo $member->id()." | " .$member->fullName()."\n";
+             }}
              else {
                 echo "Nessun membro";
-            
              }
              exit (0);
 
