@@ -45,11 +45,13 @@ switch ($command) {
 
         echo "  books:list                Elenca tutti, dichiarando se sono in prestito o disponibil, insieme al nome dell'autore ed il nome del Libro.\n";
 
-        echo "  loans:list                Mostra l'elenco dei libri prestati fino ad ora, identificando ogni libro ed ogni membro con un codice identificativo ed unico, insieme alla data dell'avvenuto prestito.\n";
+        echo "  loans:list                Mostra l'elenco dei libri prestati fino ad ora, identificando ogni libro ed ogni membro con un codice identificativo ed unico,\ninsieme alla data dell'avvenuto prestito.\n";
 
         echo "  book:lend <BOOK> <MEM>    Presta un libro a un membro, ed identifica ogni prestito con un codice numerico\n";
 
         echo "  book:return <BOOK>        Registra la restituzione di un libro, mostrando il codice del libro e del prestito appena chiuso \n";
+
+        echo "  book:status               Stampa i dati del libro e se il libro è prestato, mostra  loan_id e member_id del prestito aperto\n";
 
         echo "\nEsempi:\n";
 
@@ -126,6 +128,37 @@ switch ($command) {
 
         echo $service->returnBook($bookId, $todayYmd) . "\n";
         exit(0);
+
+    case 'book:status':
+    $bookId = $args[1] ?? '';
+
+    if ($bookId === '') {
+        echo "Uso: php bin/console.php book:status <BOOK_ID>\n";
+        exit(1);
+    }
+
+    $result = $service->bookStatus($bookId);
+
+    // Se ritorna una stringa → errore
+    if (is_string($result)) {
+        echo $result . "\n";
+        exit(0);
+    }
+
+    // Stampa dati libro
+    echo "ID: " . $result['id'] . "\n";
+    echo "Titolo: " . $result['titolo'] . "\n";
+    echo "Autore: " . $result['autore'] . "\n";
+    echo "Stato: " . $result['stato'] . "\n";
+
+    // Se in prestito, mostra info prestito
+    if ($result['stato'] === 'PRESTITO') {
+        echo "Loan ID: " . $result['loan_id'] . "\n";
+        echo "Member ID: " . $result['member_id'] . "\n";
+    }
+
+    exit(0);
+
 
     default:
         echo "Comando sconosciuto: $command\n";
