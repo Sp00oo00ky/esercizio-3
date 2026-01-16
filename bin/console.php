@@ -41,18 +41,42 @@ $todayYmd = date('Y-m-d'); // nel CSV salviamo sempre in formato stabile
 
 switch ($command) {
     case 'help':
-        echo "Biblioteca CLI - comandi disponibili:\n";
-        echo "  help                      Mostra questa guida\n";
-        echo "  books:list                Elenca libri\n";
-        echo "  loans:list                Elenca prestiti aperti\n";
-        echo "  book:lend <BOOK> <MEM>    Presta un libro a un membro\n";
-        echo "  book:return <BOOK>        Registra la restituzione di un libro\n";
-        echo "  members:list              Visualizza lista membri";
+        echo "  help                      Mostra questa guida, e visualizza i comandi eseguibili insieme ad alcuni esempi.\n";
+
+        echo "  books:list                Elenca tutti, dichiarando se sono in prestito o disponibil, insieme al nome dell'autore ed il nome del Libro.\n";
+
+        echo "  loans:list                Mostra l'elenco dei libri prestati fino ad ora, identificando ogni libro ed ogni membro con un codice identificativo ed unico, insieme alla data dell'avvenuto prestito.\n";
+
+        echo "  book:lend <BOOK> <MEM>    Presta un libro a un membro, ed identifica ogni prestito con un codice numerico\n";
+
+        echo "  book:return <BOOK>        Registra la restituzione di un libro, mostrando il codice del libro e del prestito appena chiuso \n";
+
         echo "\nEsempi:\n";
+
         echo "  php bin/console.php books:list\n";
+
         echo "  php bin/console.php book:lend B1 M1\n";
+
         echo "  php bin/console.php book:return B1\n";
-        
+
+        echo "  php bin/console.php member:list\n";
+
+        echo " \nConfigurazione (.env) \n";
+
+        echo " DATA_DIR   {$dataDir}            \n";  
+        echo " Mostra percorso della directory contenente i file CSV dei dati (libri,membri,prestiti).\n\n";
+
+        echo " DATE_FORMAT   {$dateFormat}          \n";
+        echo " Mostra il formato della data di ogni prestito ('giorno'-'mese'-'anno')\n\n";
+
+        echo " MAX_LOANS_PER_MEMBER   {$maxLoans}  \n";
+        echo " Mostra il massimo numero di prestiti che una persona puo effettuare, e cioe '2' \n\n";
+
+
+
+
+
+
 
         exit(0);
      //creazione funzione member list per stampare nome e id tutti membri//
