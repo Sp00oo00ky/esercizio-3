@@ -47,6 +47,7 @@ switch ($command) {
         echo "  loans:list                Elenca prestiti aperti\n";
         echo "  book:lend <BOOK> <MEM>    Presta un libro a un membro\n";
         echo "  book:return <BOOK>        Registra la restituzione di un libro\n";
+        echo "  members:list              Visualizza lista membri";
         echo "\nEsempi:\n";
         echo "  php bin/console.php books:list\n";
         echo "  php bin/console.php book:lend B1 M1\n";
@@ -56,7 +57,7 @@ switch ($command) {
         exit(0);
      //creazione funzione member list per stampare nome e id tutti membri//
         
-        case 'book:memberlist':
+        case 'members:list':
         $members = $membersRepo->findAll();
         if ($members){
             foreach($members as $member){
